@@ -4,7 +4,6 @@ let solvedChallenges = [];
 const modal = document.getElementById('challenge-modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const modalTitle = document.getElementById('modal-title');
-const modalDifficultySolves = document.getElementById('modal-difficulty-solves');
 const modalTagsContainer = document.getElementById('modal-tags-container');
 const modalDescription = document.getElementById('modal-description');
 const modalFilesContainer = document.getElementById('modal-files-container');
@@ -50,8 +49,7 @@ document.body.addEventListener('click', (event) => {
         }
 
         modalTitle.innerHTML = `<span class="${pointsColorClass}">[${challenge.points}]</span> ${challenge.name}`;
-        modalDifficultySolves.innerHTML = `<span class="font-semibold text-white">Difficulty:</span> <span class="text-gray-400">${toTitleCase(challenge.difficulty)}</span>`;
-        
+
         const descriptionWithLinks = challenge.description.replace(/{(.*?)\|(.*?)}/g, (match, path, text) => {
             return `<a href="${path}" target="_blank" class="text-blue-400 hover:underline">${text}</a>`;
         });
@@ -73,16 +71,18 @@ document.body.addEventListener('click', (event) => {
         modalTagsContainer.innerHTML = '';
         const allModalTags = [challenge.category, ...challenge.tags];
         if (allModalTags.length > 0) {
+            // Updated container class to help fill the space
+            modalTagsContainer.className = 'flex flex-wrap gap-3 mb-4'; 
             allModalTags.forEach(tag => {
                 const tagSpan = document.createElement('span');
-                tagSpan.className = 'bg-gray-700 text-gray-300 px-2 py-1 rounded-full';
+                tagSpan.className = 'bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm font-medium';
                 tagSpan.textContent = tag.replace('_', ' ');
                 modalTagsContainer.appendChild(tagSpan);
             });
         }
 
         flagForm.reset();
-        modalMessage.textContent = '​';
+        modalMessage.textContent = '';
         modalMessage.classList.remove('text-green-400', 'text-red-400');
         
         modal.classList.remove('hidden');
@@ -111,7 +111,7 @@ flagForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    modalMessage.textContent = '​';
+    modalMessage.textContent = '';
     modalMessage.classList.remove('text-green-400', 'text-red-400');
 
     try {
