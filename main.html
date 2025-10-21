@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture The Flag</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmP6D9zC+dD/D/j5h4E9i6r/61jC8V0P4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .solved-card {
+            border: 2px solid #34D399;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 flex flex-col min-h-screen">
+
+    <!-- Top Bar Container -->
+    <header class="bg-gray-800 text-white p-4 sm:px-8 shadow-lg flex justify-between items-center">
+        <!-- Title and Nav -->
+        <div class="flex items-center space-x-6">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">
+                Capture The Flag
+            </h1>
+        </div>
+
+        <!-- User Info and Logout Section -->
+        <div class="flex items-center space-x-4 sm:space-x-6 text-sm sm:text-base font-medium">            
+            <span id="points" class="text-yellow-400 font-bold">0 pts</span>
+        </div>
+    </header>
+
+    <!-- Main content area where categories and challenges will be dynamically generated -->
+    <main class="flex-grow p-4 sm:p-8">
+        <div id="challenges-container" class="container mx-auto">
+            <div id="loading-message" class="text-white text-center text-xl mt-10">Loading...</div>
+        </div>
+    </main>
+
+    <!-- Modal for Challenge Details -->
+    <div id="challenge-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden">
+        <div class="bg-gray-800 text-white rounded-lg shadow-xl w-full max-w-lg p-6 relative">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200">
+                <i class="fas fa-times fa-lg"></i>
+            </button>
+            
+            <h2 id="modal-title" class="text-2xl font-bold mb-2"></h2>
+            <div id="modal-details" class="text-sm mb-4 space-y-2">
+                <p id="modal-difficulty-solves" class="text-gray-300"></p>
+                <div id="modal-tags-container" class="flex flex-wrap gap-2 text-xs"></div>
+            </div>
+            <p id="modal-description-label" class="font-semibold text-white mb-2">Description</p>
+            <div id="modal-description" class="text-gray-300 mb-6 whitespace-normal break-words"></div>
+            
+            <div id="modal-files-container" class="mb-6"></div>
+
+            <form id="flag-form">
+                <div class="flex items-center space-x-2">
+                    <input id="flag-input" type="text" placeholder="Enter your flag" autocomplete="off" class="flex-grow bg-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                    <button type="submit" class="w-12 h-12 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 transition-colors duration-200 flex items-center justify-center">
+                        <i class="fas fa-check fa-lg"></i>
+                    </button>
+                </div>
+            </form>
+            <p id="modal-message" class="text-center mt-4 font-semibold"></p>
+        </div>
+    </div>
+    
+    <script src="questions.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
