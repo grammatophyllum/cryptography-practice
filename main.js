@@ -50,29 +50,25 @@ document.body.addEventListener('click', (event) => {
         }
 
         modalTitle.innerHTML = `<span class="${pointsColorClass}">[${challenge.points}]</span> ${challenge.name}`;
-        modalDifficultySolves.innerHTML = `<span class="font-semibold text-white">Difficulty:</span> <span class="text-gray-400">${toTitleCase(challenge.difficulty)}</span> | <span class="font-semibold text-white">Solves:</span> <span class="text-gray-400">${challenge.solves}</span>`;
+        modalDifficultySolves.innerHTML = `<span class="font-semibold text-white">Difficulty:</span> <span class="text-gray-400">${toTitleCase(challenge.difficulty)}</span>`;
         
         const descriptionWithLinks = challenge.description.replace(/{(.*?)\|(.*?)}/g, (match, path, text) => {
             return `<a href="${path}" target="_blank" class="text-blue-400 hover:underline">${text}</a>`;
         });
         modalDescription.innerHTML = descriptionWithLinks;
         
+        // File Link
         modalFilesContainer.innerHTML = '';
-        if (challenge.files && challenge.files.length > 0) {
-            const filesLabel = document.createElement('p');
-            filesLabel.className = 'font-semibold text-white mb-2';
-            filesLabel.textContent = 'Downloads';
-            modalFilesContainer.appendChild(filesLabel);
-            
-            challenge.files.forEach(fileName => {
-                const fileLink = document.createElement('a');
-                fileLink.href = `static/${challenge.category}/${challenge.id}/${fileName}`;
-                fileLink.target = '_blank'
-                fileLink.textContent = fileName;
-                fileLink.className = 'block text-blue-400 hover:underline';
-                modalFilesContainer.appendChild(fileLink);
-            });
-        }
+        const filesLabel = document.createElement('p');
+        filesLabel.className = 'font-semibold text-white mb-2';
+        filesLabel.textContent = 'Downloads';
+        modalFilesContainer.appendChild(filesLabel);
+        const fileLink = document.createElement('a');
+        fileLink.href = `https://raw.githubusercontent.com/grammatophyllum/cryptography-practice/refs/heads/main/static/${challenge.id}.txt`;
+        fileLink.target = '_blank'
+        fileLink.textContent = 'out.txt';
+        fileLink.className = 'block text-blue-400 hover:underline';
+        modalFilesContainer.appendChild(fileLink);
 
         modalTagsContainer.innerHTML = '';
         const allModalTags = [challenge.category, ...challenge.tags];
