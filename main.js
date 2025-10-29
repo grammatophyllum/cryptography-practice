@@ -68,6 +68,13 @@ document.body.addEventListener('click', (event) => {
         fileLink.className = 'block text-blue-400 hover:underline';
         modalFilesContainer.appendChild(fileLink);
 
+        const solLink = document.createElement('a');
+        solLink.href = `https://github.com/grammatophyllum/cryptography-practice/blob/main/solutions/${challenge.id}_solution.py`;
+        solLink.target = '_blank'
+        solLink.textContent = 'Solutions';
+        solLink.className = 'block text-blue-400 hover:underline';
+        modalFilesContainer.appendChild(solLink);
+
         modalTagsContainer.innerHTML = '';
         const allModalTags = [challenge.category, ...challenge.tags];
         if (allModalTags.length > 0) {
